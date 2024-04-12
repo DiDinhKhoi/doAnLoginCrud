@@ -44,7 +44,7 @@
                             </div>
 
                             <div class="d-grid mt-5">
-                                <button type="submit" class="btn btn-dark btn-block">Sua</button>
+                                <button type="submit" class="btn btn-dark btn-block">Update</button>
                             </div>
                         </form>
                     </div>
