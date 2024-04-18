@@ -27,22 +27,15 @@ class UserController extends Controller
 
         return Redirect('login');
     }
+
     public function Checklogin(Request $request)
     {
-        $request->validate([
-            'email' => ['nullable', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'],
-            'password' => 'required|min:8',
-        ]);
-
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('list')
-                ->withSuccess('Signed in');
-        }
-
-        return redirect("login")->withSuccess('Login details are not valid');
+        // Bỏ qua quá trình kiểm tra đăng nhập và cho phép mọi người dùng đăng nhập
+        return redirect()->intended('list')->withSuccess('Signed in');
     }
+    
+
+
     public function postUser(Request $request)
 {
     // Validate the incoming request data
