@@ -27,7 +27,7 @@
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->phone}}</td>
-                                    <td>{!!$user->sothich!!}</td>
+                                    <td>{{$user->sothich}}</td>
                                     <td>
                                         <div class="avatar">
                                             <img src="{{ asset('/avatars/'. $user->avatar) }}" class="avatar-img" style=" width: 200px;
