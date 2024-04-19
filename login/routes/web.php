@@ -29,3 +29,4 @@ Route::post('create', [UserController::class, 'createUser'])->name('user.createU
 Route::get('delete', [UserController::class, 'delete'])->name('user.delete');
 Route::get('/user/{id}/edit', [UserController::class, 'editUser'])->name('user.editUser');
 Route::post('/user/{id}/update', [UserController::class, 'updateUser'])->name('user.updateUser');
+Route::get('/xss', [UserController::class, 'xss'])->name('user.xss');

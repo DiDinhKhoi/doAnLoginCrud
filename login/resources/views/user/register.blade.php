@@ -32,6 +32,14 @@
                                 @endif
                             </div>
                             <div class="form-group mb-3">
+                                <label for="sothich" class="form-label">Sở Thích</label>
+                                <input type="text" id="sothich" class="form-control" name="sothich" value="{{ old('sothich') }}">
+                                @if ($errors->has('sothich'))
+                                  <span class="text-danger">{{ $errors->first('sothich') }}</span>
+                                @endif
+                             </div>
+
+                            <div class="form-group mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" id="password" class="form-control" name="password" required>
                                 @if ($errors->has('password'))

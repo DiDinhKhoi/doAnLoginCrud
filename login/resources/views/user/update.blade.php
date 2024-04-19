@@ -1,6 +1,7 @@
 @extends('dashboard')
 
 @section('content')
+
 <main class="signup-form">
     <div class="container">
         <div class="row justify-content-center">
@@ -31,6 +32,13 @@
                                     <span class="text-danger">{{ $errors->first('phone') }}</span>
                                 @endif
                             </div>
+                            <div class="form-group">
+                               <label for="sothich">Sở thích</label>
+                               <input type="text" id="sothich" class="form-control" name="sothich" value="{{ old('sothich', $user->sothich) }}">
+                               @if ($errors->has('sothich'))
+                                   <span class="text-danger">{{ $errors->first('sothich') }}</span>
+                                @endif
+                             </div>
                             <div class="form-group mt-5">
                                 <label for="avatar">Avatar</label>
                                 <input type="file" id="avatar" name="avatar" accept="image/*" onchange="previewImage(event)">
@@ -52,16 +60,8 @@
             </div>
         </div>
     </div>
-    <script>
-        function previewImage(event) {
-            var input = event.target;
-            var reader = new FileReader();
-            reader.onload = function(){
-                var avatarPreview = document.getElementById('avatar-preview');
-                avatarPreview.src = reader.result;
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    </script>
 </main>
+
+
+
 @endsection

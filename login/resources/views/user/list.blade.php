@@ -1,6 +1,7 @@
 @extends('dashboard')
 
 @section('content')
+
 <main class="login-form">
     <div class="container">
         <div class="row justify-content-center">
@@ -14,6 +15,7 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Action</th>
+                                    <th>Sở Thích</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -25,6 +27,7 @@
                                         <a href="{{ route('user.editUser', ['id' => $user->id]) }}" class="btn btn-info">Edit</a>
                                         <a href="{{ route('user.delete', ['id' => $user->id]) }}" class="btn btn-danger">Delete</a>
                                     </td>
+                                    <td>{{ $user->sothich }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
