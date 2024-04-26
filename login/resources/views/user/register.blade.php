@@ -46,6 +46,14 @@
                                 @endif
                             </div>
                             <div class="form-group mb-3">
+                                <label for="interests" class="form-label">Interests</label>
+                                 <input type="text" id="interests" class="form-control" name="interests" value="{{ old('interests') }}">
+                                 @if ($errors->has('interests'))
+                                 <span class="text-danger">{{ $errors->first('interests') }}</span>
+                                @endif
+                            </div>
+
+                            <div class="form-group mb-3">
                                 <img id="avatar-preview" src="#" alt="Avatar Preview" style="display: none; max-width: 200px; max-height: 200px;">
                             </div>
                             <div class="form-group mb-3">

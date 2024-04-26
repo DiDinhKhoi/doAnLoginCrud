@@ -52,6 +52,7 @@ class UserController extends Controller
         'phone' => ['nullable', 'regex:/^0[0-9]{9}$/'],
         'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'password' => ['required', 'string', 'min:8'],
+        'interests' => 'nullable|string',
     ]);
 
     if ($validator->fails()) {
@@ -75,7 +76,8 @@ class UserController extends Controller
         'email' => $data['email'],
         'phone' => $data['phone'],
         'password' => Hash::make($data['password']),
-        'avatar' => $data['avatar'] ?? null, // Default to null if avatar is not present
+        'interests' => $data['interests'], 
+        'avatar' => $data['avatar'] ?? null,
     ]);
 
     // Redirect the user to the login page
@@ -112,6 +114,7 @@ class UserController extends Controller
             'phone' => ['nullable', 'regex:/^0[0-9]{9}$/'],
             'password' => ['required', 'string', 'min:8'],
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'interests' => 'nullable|string',
         ]);
         $data = $request->all();
 
@@ -127,6 +130,7 @@ class UserController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'interests' => $data['interests'],    
             'password' => Hash::make($data['password']),
             'avatar' => $data['avatar'] ?? null, // Default to null if avatar is not present
         ]);
@@ -157,6 +161,8 @@ class UserController extends Controller
             'email' => 'required|unique:users,email,' . $user->id . '|max:255',
             'phone' => ['nullable', 'regex:/^0[0-9]{9}$/'],
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'interests' => 'nullable|string',
+           
         ]);
 
         $data = $request->all();
@@ -173,6 +179,7 @@ class UserController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'interests' => $data['interests'], 
             'avatar' => $data['avatar'] ?? $user->avatar, // Use the existing avatar if not provided
         ]);
 

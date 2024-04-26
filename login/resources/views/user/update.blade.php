@@ -31,6 +31,13 @@
                                     <span class="text-danger">{{ $errors->first('phone') }}</span>
                                 @endif
                             </div>
+                            <div class="form-group">
+                             <label for="interests">Interests</label>
+                             <input type="text" id="interests" class="form-control" name="interests" value="{{ old('interests', $user->interests) }}">
+                                 @if ($errors->has('interests'))
+                              <span class="text-danger">{{ $errors->first('interests') }}</span>
+                                 @endif
+                                </div>
                             <div class="form-group mt-5">
                                 <label for="avatar">Avatar</label>
                                 <input type="file" id="avatar" name="avatar" accept="image/*" onchange="previewImage(event)">
